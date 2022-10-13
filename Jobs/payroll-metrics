@@ -8,7 +8,7 @@ def argocd_password_name = "argocd-payroll-metrics"
 pipeline {
     agent {
         kubernetes {
-            label "payroll-backoffice-infra-fso-${app_name}-job"
+            label "payroll-backoffice-infra-scaling-pods-job"
             yamlFile 'Jobs/KubernetesPods.yaml'
         }
     }
