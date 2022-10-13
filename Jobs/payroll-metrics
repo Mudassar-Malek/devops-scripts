@@ -2,7 +2,7 @@
 
 def gitCredID = "github-svc-sbseg-ci"
 def argocd_server = new URL("https://payroll.argocd.tools-k8s-prd.a.intuit.com").getHost() + ":443"
-def argocd_password_name = "argocd-enrollment"
+def argocd_password_name = "argocd-payroll-metrics"
 
 
 pipeline {
