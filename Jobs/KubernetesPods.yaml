@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: payroll-backoffice-infra-fso-job
+spec:
+  containers:
+    - name: fso
+      image: docker.intuit.com/small-business/payroll/services/fso:0.2
+      tty: true
+      command: [ "cat" ]
+      imagePullPolicy: Always
+      resources:
+        limits:
+          github.com/fuse: 1
