@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # getting credentials from credentials.txt file 
-source config.sh
+source ./config.sh
 
 # Github Credential 
 gurl=$github_url
