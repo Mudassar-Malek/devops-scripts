@@ -15,8 +15,6 @@ argourl=$argocdurl
 # Application namespace on argocd 
 namespace=$k8snamespace
 
-# To delete old directory if persist
-    rm -rf pts-qal
 
 # cloning repo with specific branch on pts-dev directory 
     git clone -b $branch --single-branch $gurl pts-qal && cd pts-qal
