@@ -40,9 +40,6 @@ newminreplicas="minReplicas: $minreplicas"
 # pushing changes to public repository 
 #git push origin $branch
 
-# argocd login 
-   argocd login $argourl --sso --insecure
-
 # performing argocd sync for specific application 
     argocd app get $namespace
    #argocd app sync $namespace
