@@ -62,7 +62,7 @@ pipeline {
                   container('fso') {
                       withEnv(["ARGOCD_SERVER=${argocd_server}", 'ARGOCD_OPTS= --insecure']) {
                         script {
-                            sh(label: 'Scaling in', script: "sh apps.sh ${params.Service} ${params.Environment} ${params.Region} ${params.maxReplicas} ${params.minReplicas}")
+                            sh(label: 'Scaling in', script: "pwd;ls -ltr;sh apps.sh ${params.Service} ${params.Environment} ${params.Region} ${params.maxReplicas} ${params.minReplicas}")
                         }
                     }
               }
