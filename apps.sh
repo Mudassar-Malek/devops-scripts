@@ -15,9 +15,9 @@ argourl=$argocdurl
 # Application namespace on argocd 
 namespace=$k8snamespace
 
-
+echo $gurl
 # cloning repo with specific branch on pts-dev directory 
-    git clone -b $branch --single-branch $gurl pts-qal && cd pts-qal
+git clone -b $branch --single-branch $gurl
 
 #replicas=$maxreplicas
 oldmaxreplicas="maxReplicas: $(cat manifest.yaml | grep maxReplicas | awk '{print $2}')"
