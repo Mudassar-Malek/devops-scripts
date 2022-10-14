@@ -34,7 +34,11 @@ pipeline {
                                 name: 'Environment'
                             ),
                             string(
-                                name: 'Replicas', 
+                                name: 'maxReplicas', 
+                                trim: true
+                            ),
+                            string(
+                                name: 'minReplicas', 
                                 trim: true
                             )
                         ])
@@ -58,7 +62,7 @@ pipeline {
                   container('fso') {
                       withEnv(["ARGOCD_SERVER=${argocd_server}", 'ARGOCD_OPTS= --insecure']) {
                         script {
-                            sh(label: 'Scaling in', script: "sh apps.sh ${params.Service} ${params.Environment} ${params.Region} ${params.Replicas}")
+                            sh(label: 'Scaling in', script: "sh apps.sh ${params.Service} ${params.Environment} ${params.Region} ${params.maxReplicas} ${params.minReplicas}")
                         }
                     }
               }

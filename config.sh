@@ -9,13 +9,16 @@ env=$2
 # echo "Choose AWS Region :- (USE2 USW2) "
 region=$3
 
-# Provide number of replicas
+# Provide max number of replicas (maxreplicas)
 maxreplicas=$4
+
+# Provide min number of replicas (minreplicas)
+minreplicas=$5
 
 ws="${svc}-${env}-${region}"
 
 case $ws in 
-"jss-qa-usw2") echo "your env is jss-qa-usw2"
+"pts-qal-usw2") echo "your env is pts-qal-usw2"
 
     github_url=https://github.intuit.com/payroll-payrolltax/payroll-metrics-deployment.git
     argocdurl=payroll.argocd.tools-k8s-prd.a.intuit.com
@@ -23,12 +26,12 @@ case $ws in
     k8snamespace=payroll-payrollmetrics-usw2-qal
     ;;
 
-"jss-prod-usw2") echo "your env is jss-prod-usw2"
+"pts-prod-usw2") echo "your env is pts-prod-usw2"
 
     github_url=https://github.intuit.com/payroll-payrolltax/payroll-metrics-deployment.git
     argocdurl=payroll.argocd.tools-k8s-prd.a.intuit.com
     gbranch=prod
-    k8snamespace=jss-prod-usw2
+    k8snamespace=pts-prod-usw2
     ;;
 
 *) echo "Invalid value, please enter valid value "

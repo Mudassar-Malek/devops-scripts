@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # getting credentials from credentials.txt file 
-source variables.sh
+source config.sh
 
 # Github Credential 
 gurl=$github_url
@@ -12,31 +12,32 @@ branch=$gbranch
 # Argocd URL
 argourl=$argocdurl
 
-# Replicas number
-#replicas=$maxreplicas
-#oldreplicas="replicas: $(cat manifest.yaml | grep replicas | awk '{print $2}')"
-#newreplicas="replicas: $replicas"
-
 # Application namespace on argocd 
 namespace=$k8snamespace
 
 # To delete old directory if persist
-    rm -rf pts-dev
+    rm -rf pts-qal
 
 # cloning repo with specific branch on pts-dev directory 
-    git clone -b $branch --single-branch $gurl pts-dev && cd pts-dev
+    git clone -b $branch --single-branch $gurl pts-qal && cd pts-qal
 
 #replicas=$maxreplicas
-oldreplicas="maxReplicas: $(cat manifest.yaml | grep maxReplicas | awk '{print $2}')"
-newreplicas="maxReplicas: $maxreplicas"
+oldmaxreplicas="maxReplicas: $(cat manifest.yaml | grep maxReplicas | awk '{print $2}')"
+newmaxreplicas="maxReplicas: $maxreplicas"
 
-# To change maxreplicas 1 to 0 for scale down application  
-   # sed -i '' -e "s/maxReplicas: 1/maxReplicas: 0/g" manifest.yaml
-   sed -i '' -e "s/$oldreplicas/$newreplicas/g" manifest.yaml
+# To change maxreplicas as per user input for scale up and down application  
+   sed -i '' -e "s/$oldmaxreplicas/$newmaxreplicas/g" manifest.yaml
+
+#replicas=$minreplicas
+oldminreplicas="minReplicas: $(cat manifest.yaml | grep minReplicas | awk '{print $2}')"
+newminreplicas="minReplicas: $minreplicas"
+
+# To change minreplicas as per user input for scale up and down application  
+   sed -i '' -e "s/$oldminreplicas/$newminreplicas/g" manifest.yaml
 
 # commiting changes to repository 
     git add .
-    git commit -m "maxReplicas change one to zero"
+    git commit -m "maxReplicas or minreplcias as per user input reflect on manifest yaml file"
 
 # pushing changes to public repository 
 #git push origin $branch
@@ -46,3 +47,4 @@ newreplicas="maxReplicas: $maxreplicas"
 
 # performing argocd sync for specific application 
     argocd app get $namespace
+   #argocd app sync $namespace
