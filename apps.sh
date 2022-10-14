@@ -19,25 +19,28 @@ echo $gurl
 echo $gbranch
 echo $namespace
 # cloning repo with specific branch on pts-dev directory 
-git clone -b $branch --single-branch $gurl
+git clone -b $branch --single-branch $gurl test 
+
+# cloning repo with specific branch on pts-dev directory 
+    #git clone -b $branch --single-branch $gurl 
 
 #replicas=$maxreplicas
-oldmaxreplicas="maxReplicas: $(cat manifest.yaml | grep maxReplicas | awk '{print $2}')"
+oldmaxreplicas="maxReplicas: $(cat test/manifest.yaml | grep maxReplicas | awk '{print $2}')"
 newmaxreplicas="maxReplicas: $maxreplicas"
 
 # To change maxreplicas as per user input for scale up and down application  
-   sed -i '' -e "s/$oldmaxreplicas/$newmaxreplicas/g" manifest.yaml
+   sed -i '' -e "s/$oldmaxreplicas/$newmaxreplicas/g" test/manifest.yaml
 
 #replicas=$minreplicas
-oldminreplicas="minReplicas: $(cat manifest.yaml | grep minReplicas | awk '{print $2}')"
+oldminreplicas="minReplicas: $(cat test/manifest.yaml | grep minReplicas | awk '{print $2}')"
 newminreplicas="minReplicas: $minreplicas"
 
 # To change minreplicas as per user input for scale up and down application  
-   sed -i '' -e "s/$oldminreplicas/$newminreplicas/g" manifest.yaml
+   sed -i '' -e "s/$oldminreplicas/$newminreplicas/g" test/manifest.yaml
 
 # commiting changes to repository 
-    git add .
-    git commit -m "maxReplicas or minreplcias as per user input reflect on manifest yaml file"
+    git -C test add .
+    git -C test commit -m "maxReplicas or minreplcias as per user input reflect on manifest yaml file"
 
 # pushing changes to public repository 
 #git push origin $branch
