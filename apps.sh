@@ -29,6 +29,7 @@ ls -l dep_repo
 #replicas=$maxreplicas
 oldmaxreplicas="maxReplicas: $(cat dep_repo/manifest.yaml | grep maxReplicas | awk '{print $2}')"
 newmaxreplicas="maxReplicas: $maxreplicas"
+echo $oldmaxreplicas
 
 # To change maxreplicas as per user input for scale up and down application  
    sudo sed -i '' -e "s/$oldmaxreplicas/$newmaxreplicas/g" dep_repo/manifest.yaml
