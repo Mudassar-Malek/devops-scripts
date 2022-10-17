@@ -40,8 +40,8 @@ newminreplicas="minReplicas: $minreplicas"
    sudo sed -i -e "s/$oldminreplicas/$newminreplicas/g" dep_repo/manifest.yaml
    echo "changed the replicas"
 # commiting changes to repository 
-    git -C ${FOLDER_NAME} add .
-    git -C ${FOLDER_NAME} user.name=${GIT_USERNAME} user.email=${GIT_USERNAME} commit -m "maxReplicas or minreplcias as per user input reflect on manifest yaml file"
+    git -C dep_repo add .
+    git -C dep_repo user.name=${GIT_USERNAME} user.email=${GIT_USERNAME} commit -m "maxReplicas or minreplcias as per user input reflect on manifest yaml file"
 
 # pushing changes to public repository 
 #git push origin $branch
