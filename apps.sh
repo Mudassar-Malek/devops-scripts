@@ -41,7 +41,7 @@ newminreplicas="minReplicas: $minreplicas"
    echo "changed the replicas"
 # commiting changes to repository 
     git -C dep_repo add .
-    git -C dep_repo user.name=${GIT_USERNAME} user.email=${GIT_USERNAME} commit -m "maxReplicas or minreplcias as per user input reflect on manifest yaml file"
+    git -C dep_repo commit -m "maxReplicas or minreplcias as per user input reflect on manifest yaml file"
 
 # pushing changes to public repository 
 #git push origin $branch
