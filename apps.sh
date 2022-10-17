@@ -45,8 +45,8 @@ newminreplicas="minReplicas: $minreplicas"
     git -C dep_repo commit -m "maxReplicas or minreplcias as per user input reflect on manifest yaml file"
 
 # pushing changes to public repository 
-#git push origin $branch
+    git -C dep_repo push
 
 # performing argocd sync for specific application 
-    argocd app get $namespace
-   #argocd app sync $namespace
+   #argocd app get $namespace
+   argocd app sync $namespace
