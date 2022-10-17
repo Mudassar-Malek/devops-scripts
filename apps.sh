@@ -39,7 +39,8 @@ newminreplicas="minReplicas: $minreplicas"
 # To change minreplicas as per user input for scale up and down application  
    sudo sed -i -e "s/$oldminreplicas/$newminreplicas/g" dep_repo/manifest.yaml
    echo "changed the replicas"
-# commiting changes to repository 
+# commiting changes to repository
+    git config --global user.email ${GIT_USERNAME}
     git -C dep_repo add .
     git -C dep_repo commit -m "maxReplicas or minreplcias as per user input reflect on manifest yaml file"
 
