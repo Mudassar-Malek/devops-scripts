@@ -49,4 +49,4 @@ newminreplicas="minReplicas: $minreplicas"
 
 # performing argocd sync for specific application 
    #argocd app get $namespace
-   argocd app sync $namespace
+   argocd app sync $namespace --operation
