@@ -26,6 +26,7 @@ case $ws in
     argocdurl=payroll.argocd.tools-k8s-prd.a.intuit.com
     gbranch=environments/qal-usw2-eks 
     k8snamespace=payroll-payrollmetrics-usw2-qal
+    FOLDER_NAME=payroll-metrics-deployment
     ;;
 
 "payroll-metrics-prod-usw2") echo "your env is pts-prod-usw2"
