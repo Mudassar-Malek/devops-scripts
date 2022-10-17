@@ -17,7 +17,8 @@ minreplicas=$5
 
 ws="${svc}-${env}-${region}"
 
-
+MY_SCRIPT_VARIABLE="${GIT_USERNAME}"
+echo $MY_SCRIPT_VARIABLE
 
 case $ws in 
 "payroll-metrics-qal-usw2") echo "your env is pts-qal-usw2"
