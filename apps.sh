@@ -25,22 +25,22 @@ git clone -b $branch --single-branch "https://${GIT_USERNAME}:${GIT_PASSWORD}@${
     #git clone -b $branch --single-branch $gurl 
 
 #replicas=$maxreplicas
-oldmaxreplicas="maxReplicas: $(cat test/manifest.yaml | grep maxReplicas | awk '{print $2}')"
+oldmaxreplicas="maxReplicas: $(cat ${FOLDER_NAME}/manifest.yaml | grep maxReplicas | awk '{print $2}')"
 newmaxreplicas="maxReplicas: $maxreplicas"
 
 # To change maxreplicas as per user input for scale up and down application  
    sed -i '' -e "s/$oldmaxreplicas/$newmaxreplicas/g" ${FOLDER_NAME}/manifest.yaml
 
 #replicas=$minreplicas
-oldminreplicas="minReplicas: $(cat test/manifest.yaml | grep minReplicas | awk '{print $2}')"
+oldminreplicas="minReplicas: $(cat ${FOLDER_NAME}/manifest.yaml | grep minReplicas | awk '{print $2}')"
 newminreplicas="minReplicas: $minreplicas"
 
 # To change minreplicas as per user input for scale up and down application  
    sed -i '' -e "s/$oldminreplicas/$newminreplicas/g" ${FOLDER_NAME}/manifest.yaml
 
 # commiting changes to repository 
-    git -C test add .
-    git -C test commit -m "maxReplicas or minreplcias as per user input reflect on manifest yaml file"
+    git -C ${FOLDER_NAME} add .
+    git -C ${FOLDER_NAME} commit -m "maxReplicas or minreplcias as per user input reflect on manifest yaml file"
 
 # pushing changes to public repository 
 #git push origin $branch
