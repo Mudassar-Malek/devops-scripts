@@ -22,7 +22,7 @@ ws="${svc}-${env}-${region}"
 case $ws in 
 "payroll-metrics-qal-usw2") echo "your env is pts-qal-usw2"
 
-    github_url="https://${GIT_USERNAME}:${GIT_PASORD}@github.intuit.com/payroll-payrolltax/payroll-metrics-deployment.git"
+    github_url="https://${GIT_USERNAME}:${GIT_PASSWORD}@github.intuit.com/payroll-payrolltax/payroll-metrics-deployment.git"
     argocdurl=payroll.argocd.tools-k8s-prd.a.intuit.com
     gbranch=environments/qal-usw2-eks 
     k8snamespace=payroll-payrollmetrics-usw2-qal
