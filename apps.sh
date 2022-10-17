@@ -19,7 +19,7 @@ echo $gurl
 echo $gbranch
 echo $namespace
 # cloning repo with specific branch on pts-dev directory 
-git clone "https://${GIT_USERNAME}:${GIT_PASSWORD}@${gurl}" 
+git clone "https://${GIT_USERNAME}:${GIT_PASSWORD}@${gurl}" test
 
 # cloning repo with specific branch on pts-dev directory 
     #git clone -b $branch --single-branch $gurl 
