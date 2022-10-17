@@ -21,9 +21,6 @@ echo $namespace
 # cloning repo with specific branch on pts-dev directory 
 git clone -b $gbranch --single-branch "https://${GIT_USERNAME}:${GIT_PASSWORD}@${gurl}" dep_repo
 
-ls -l dep_repo
-pwd
-
 # cloning repo with specific branch on pts-dev directory 
     #git clone -b $branch --single-branch $gurl 
 
@@ -43,8 +40,8 @@ newminreplicas="minReplicas: $minreplicas"
    sudo sed -i -e "s/$oldminreplicas/$newminreplicas/g" dep_repo/manifest.yaml
    echo "changed the replicas"
 # commiting changes to repository 
-    #git -C ${FOLDER_NAME} add .
-    #git -C ${FOLDER_NAME} commit -m "maxReplicas or minreplcias as per user input reflect on manifest yaml file"
+    git -C ${FOLDER_NAME} add .
+    git -C ${FOLDER_NAME} user.name=${GIT_USERNAME} user.email=${GIT_USERNAME} commit -m "maxReplicas or minreplcias as per user input reflect on manifest yaml file"
 
 # pushing changes to public repository 
 #git push origin $branch
