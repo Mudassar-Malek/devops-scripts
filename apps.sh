@@ -37,7 +37,7 @@ newminreplicas="minReplicas: $minreplicas"
 
 # To change minreplicas as per user input for scale up and down application  
    sed -i '' -e "s/$oldminreplicas/$newminreplicas/g" ${FOLDER_NAME}/manifest.yaml
-
+   echo "changed the replicas"
 # commiting changes to repository 
     git -C ${FOLDER_NAME} add .
     git -C ${FOLDER_NAME} commit -m "maxReplicas or minreplcias as per user input reflect on manifest yaml file"
