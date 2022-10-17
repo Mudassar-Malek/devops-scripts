@@ -39,8 +39,8 @@ newminreplicas="minReplicas: $minreplicas"
    sed -i '' -e "s/$oldminreplicas/$newminreplicas/g" ${FOLDER_NAME}/manifest.yaml
    echo "changed the replicas"
 # commiting changes to repository 
-    git -C ${FOLDER_NAME} add .
-    git -C ${FOLDER_NAME} commit -m "maxReplicas or minreplcias as per user input reflect on manifest yaml file"
+    #git -C ${FOLDER_NAME} add .
+    #git -C ${FOLDER_NAME} commit -m "maxReplicas or minreplcias as per user input reflect on manifest yaml file"
 
 # pushing changes to public repository 
 #git push origin $branch
