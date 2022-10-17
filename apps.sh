@@ -19,24 +19,26 @@ echo $gurl
 echo $gbranch
 echo $namespace
 # cloning repo with specific branch on pts-dev directory 
-git clone -b $gbranch --single-branch "https://${GIT_USERNAME}:${GIT_PASSWORD}@${gurl}"
+git clone -b $gbranch --single-branch "https://${GIT_USERNAME}:${GIT_PASSWORD}@${gurl}" dep_repo
+
+ls -l dep_repo
 
 # cloning repo with specific branch on pts-dev directory 
     #git clone -b $branch --single-branch $gurl 
 
 #replicas=$maxreplicas
-oldmaxreplicas="maxReplicas: $(cat ${FOLDER_NAME}/manifest.yaml | grep maxReplicas | awk '{print $2}')"
+oldmaxreplicas="maxReplicas: $(cat dep_repo/manifest.yaml | grep maxReplicas | awk '{print $2}')"
 newmaxreplicas="maxReplicas: $maxreplicas"
 
 # To change maxreplicas as per user input for scale up and down application  
-   sed -i '' -e "s/$oldmaxreplicas/$newmaxreplicas/g" ${FOLDER_NAME}/manifest.yaml
+   sed -i '' -e "s/$oldmaxreplicas/$newmaxreplicas/g" dep_repo/manifest.yaml
 
 #replicas=$minreplicas
-oldminreplicas="minReplicas: $(cat ${FOLDER_NAME}/manifest.yaml | grep minReplicas | awk '{print $2}')"
+oldminreplicas="minReplicas: $(cat dep_repo/manifest.yaml | grep minReplicas | awk '{print $2}')"
 newminreplicas="minReplicas: $minreplicas"
 
 # To change minreplicas as per user input for scale up and down application  
-   sed -i '' -e "s/$oldminreplicas/$newminreplicas/g" ${FOLDER_NAME}/manifest.yaml
+   sed -i '' -e "s/$oldminreplicas/$newminreplicas/g" dep_repo/manifest.yaml
    echo "changed the replicas"
 # commiting changes to repository 
     #git -C ${FOLDER_NAME} add .
