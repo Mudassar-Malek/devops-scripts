@@ -29,14 +29,14 @@ oldmaxreplicas="maxReplicas: $(cat test/manifest.yaml | grep maxReplicas | awk '
 newmaxreplicas="maxReplicas: $maxreplicas"
 
 # To change maxreplicas as per user input for scale up and down application  
-   sed -i '' -e "s/$oldmaxreplicas/$newmaxreplicas/g" test/manifest.yaml
+   sed -i '' -e "s/$oldmaxreplicas/$newmaxreplicas/g" ${FOLDER_NAME}/manifest.yaml
 
 #replicas=$minreplicas
 oldminreplicas="minReplicas: $(cat test/manifest.yaml | grep minReplicas | awk '{print $2}')"
 newminreplicas="minReplicas: $minreplicas"
 
 # To change minreplicas as per user input for scale up and down application  
-   sed -i '' -e "s/$oldminreplicas/$newminreplicas/g" test/manifest.yaml
+   sed -i '' -e "s/$oldminreplicas/$newminreplicas/g" ${FOLDER_NAME}/manifest.yaml
 
 # commiting changes to repository 
     git -C test add .
