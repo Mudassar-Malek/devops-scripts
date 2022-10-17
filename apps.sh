@@ -22,6 +22,7 @@ echo $namespace
 git clone -b $gbranch --single-branch "https://${GIT_USERNAME}:${GIT_PASSWORD}@${gurl}" dep_repo
 
 ls -l dep_repo
+whoami
 
 # cloning repo with specific branch on pts-dev directory 
     #git clone -b $branch --single-branch $gurl 
