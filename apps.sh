@@ -51,7 +51,7 @@ newminreplicas="minReplicas: $minreplicas"
 
 # performing argocd sync for specific application 
    #argocd app get $namespace
-   if [[ "${newmaxreplicas}" -eq 0 ]] && [[ "${newminreplicas}" -eq 0 ]]; 
+   if [[ "${newmaxreplicas}" -eq "0" ]] && [[ "${newminreplicas}" -eq "0" ]]; 
    then
     echo $namespace
 fi
