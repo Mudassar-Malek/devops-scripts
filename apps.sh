@@ -19,7 +19,12 @@ echo $gurl
 echo $gbranch
 echo $namespace
 
-
+if [[ "${newmaxreplicas}" == 0 ]] && [[ "${newminreplicas}" == 0 ]]; 
+   then
+        echo $namespace
+        #argocd app delete $namespace
+#fi
+   else
 # cloning repo with specific branch on pts-dev directory 
 git clone -b $gbranch --single-branch "https://${GIT_USERNAME}:${GIT_PASSWORD}@${gurl}" dep_repo
 
@@ -51,11 +56,11 @@ newminreplicas="minReplicas: $minreplicas"
 
 # performing argocd sync for specific application 
    #argocd app get $namespace
-   if [[ "${newmaxreplicas}" == 0 ]] && [[ "${newminreplicas}" == 0 ]]; 
-   then
-        argocd app delete $namespace
+   #if [[ "${newmaxreplicas}" == 0 ]] && [[ "${newminreplicas}" == 0 ]]; 
+   #then
+        #argocd app delete $namespace
 #fi
-   else 
+   #else 
         argocd app sync $namespace
         argocd app wait $namespace --operation
    fi
