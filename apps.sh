@@ -54,8 +54,8 @@ newminreplicas="minReplicas: $minreplicas"
    if [[ "${newmaxreplicas}" == "0" ]] && [[ "${newminreplicas}" == "0" ]]; 
    then
     echo $namespace
-fi
-   #else 
+#fi
+   else 
         argocd app sync $namespace
         argocd app wait $namespace --operation
-   #fi
+   fi
