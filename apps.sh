@@ -24,6 +24,7 @@ if [[ "${newmaxreplicas}" == 0 ]] && [[ "${newminreplicas}" == 0 ]];
         echo $namespace
         #argocd app delete $namespace
 #fi
+       break
    else
 # cloning repo with specific branch on pts-dev directory 
 git clone -b $gbranch --single-branch "https://${GIT_USERNAME}:${GIT_PASSWORD}@${gurl}" dep_repo
