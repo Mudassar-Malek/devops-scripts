@@ -20,7 +20,7 @@ ws="${svc}-${env}-${region}"
 
 
 case $ws in 
-"payroll-metrics-qal-usw2") echo "your env is pts-qal-usw2"
+"payroll-metrics-qal-usw2") echo "your env is payroll-metrics-qal-usw2"
 
     github_url=github.intuit.com/payroll-payrolltax/payroll-metrics-deployment.git
     argocdurl=payroll.argocd.tools-k8s-prd.a.intuit.com
@@ -28,7 +28,7 @@ case $ws in
     k8snamespace=payroll-payrollmetrics-usw2-qal
     ;;
 
-"payroll-metrics-prod-usw2") echo "your env is pts-prod-usw2"
+"payroll-metrics-prod-usw2") echo "your env is payroll-metrics-prod-usw2"
 
     github_url=https://github.intuit.com/payroll-payrolltax/payroll-metrics-deployment.git
     argocdurl=payroll.argocd.tools-k8s-prd.a.intuit.com

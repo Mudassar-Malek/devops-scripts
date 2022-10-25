@@ -19,13 +19,6 @@ echo $gurl
 echo $gbranch
 echo $namespace
 
-if [[ "${newmaxreplicas}" == 0 ]] && [[ "${newminreplicas}" == 0 ]]; 
-   then
-        echo $namespace
-        #argocd app delete $namespace
-#fi
-       break
-   else
 # cloning repo with specific branch on pts-dev directory 
 git clone -b $gbranch --single-branch "https://${GIT_USERNAME}:${GIT_PASSWORD}@${gurl}" dep_repo
 
@@ -47,6 +40,14 @@ newminreplicas="minReplicas: $minreplicas"
 # To change minreplicas as per user input for scale up and down application  
    sudo sed -i -e "s/$oldminreplicas/$newminreplicas/g" dep_repo/manifest.yaml
    echo "changed the replicas"
+
+   if [[ "${newmaxreplicas}" == 0 ]] && [[ "${newminreplicas}" == 0 ]]; 
+   then
+        echo $namespace
+        #argocd app delete $namespace
+#fi
+       break
+   else
 # commiting changes to repository
     git config --global user.email ${GIT_USERNAME}
     git -C dep_repo add .
