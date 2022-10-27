@@ -44,9 +44,9 @@ newminreplicas="minReplicas: $minreplicas"
    if [[ "${newmaxreplicas}" == 0 ]] && [[ "${newminreplicas}" == 0 ]]; 
    then
         echo $namespace
-        #argocd app delete $namespace
+       
 #fi
-       break
+    
    else
 # commiting changes to repository
     git config --global user.email ${GIT_USERNAME}
@@ -60,7 +60,7 @@ newminreplicas="minReplicas: $minreplicas"
    #argocd app get $namespace
    #if [[ "${newmaxreplicas}" == 0 ]] && [[ "${newminreplicas}" == 0 ]]; 
    #then
-        #argocd app delete $namespace
+        
 #fi
    #else 
         argocd app sync $namespace
