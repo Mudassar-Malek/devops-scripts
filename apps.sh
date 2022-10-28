@@ -28,8 +28,8 @@ git clone -b $gbranch --single-branch "https://${GIT_USERNAME}:${GIT_PASSWORD}@$
 #replicas=$maxreplicas
 oldmaxreplicas="maxReplicas: $(cat dep_repo/manifest.yaml | grep maxReplicas | awk '{print $2}')"
 newmaxreplicas="maxReplicas: $maxreplicas"
-echo $oldmaxreplicas
-echo $newmaxreplicas
+#echo $oldmaxreplicas
+#echo $newmaxreplicas
 
 # To change maxreplicas as per user input for scale up and down application  
    sudo sed -i -e "s/$oldmaxreplicas/$newmaxreplicas/g" dep_repo/manifest.yaml
@@ -37,17 +37,15 @@ echo $newmaxreplicas
 #replicas=$minreplicas
 oldminreplicas="minReplicas: $(cat dep_repo/manifest.yaml | grep minReplicas | awk '{print $2}')"
 newminreplicas="minReplicas: $minreplicas"
-echo $newminreplicas
+#echo $newminreplicas
 # To change minreplicas as per user input for scale up and down application  
 sudo sed -i -e "s/$oldminreplicas/$newminreplicas/g" dep_repo/manifest.yaml
 echo "changed the replicas"
 
 if [[ ${maxreplicas} == "0" && ${minreplicas} == "0" ]] 
 then
-    echo $namespace
-    echo "condition applied"
+    argocd app get $namespace
 else
-   echo "condition not applied"
 # commiting changes to repository
     git config --global user.email ${GIT_USERNAME}
     git -C dep_repo add .
