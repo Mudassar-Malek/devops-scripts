@@ -29,6 +29,7 @@ git clone -b $gbranch --single-branch "https://${GIT_USERNAME}:${GIT_PASSWORD}@$
 oldmaxreplicas="maxReplicas: $(cat dep_repo/manifest.yaml | grep maxReplicas | awk '{print $2}')"
 newmaxreplicas="maxReplicas: $maxreplicas"
 echo $oldmaxreplicas
+echo $newmaxreplicas
 
 # To change maxreplicas as per user input for scale up and down application  
    sudo sed -i -e "s/$oldmaxreplicas/$newmaxreplicas/g" dep_repo/manifest.yaml
@@ -36,17 +37,15 @@ echo $oldmaxreplicas
 #replicas=$minreplicas
 oldminreplicas="minReplicas: $(cat dep_repo/manifest.yaml | grep minReplicas | awk '{print $2}')"
 newminreplicas="minReplicas: $minreplicas"
-
+echo $newminreplicas
 # To change minreplicas as per user input for scale up and down application  
-   sudo sed -i -e "s/$oldminreplicas/$newminreplicas/g" dep_repo/manifest.yaml
-   echo "changed the replicas"
+sudo sed -i -e "s/$oldminreplicas/$newminreplicas/g" dep_repo/manifest.yaml
+echo "changed the replicas"
 
 if [[ ${newmaxreplicas} == "0" && ${newminreplicas} == "0" ]] 
 then
-        echo $namespace
-        echo "condition applied"
-#fi
-    
+    echo $namespace
+    echo "condition applied"
 else
    echo "condition not applied"
 # commiting changes to repository
@@ -58,12 +57,6 @@ else
     git -C dep_repo push
 
 # performing argocd sync for specific application 
-   #argocd app get $namespace
-   #if [[ "${newmaxreplicas}" == 0 ]] && [[ "${newminreplicas}" == 0 ]]; 
-   #then
-        
-#fi
-   #else 
-        argocd app sync $namespace
-        argocd app wait $namespace --operation
+    argocd app sync $namespace
+    argocd app wait $namespace --operation
 fi
