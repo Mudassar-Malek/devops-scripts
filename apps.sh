@@ -44,10 +44,12 @@ newminreplicas="minReplicas: $minreplicas"
    if [[ ${newmaxreplicas} == 0 ]] && [[ ${newminreplicas} == 0 ]]; 
    then
         echo $namespace
+        echo "condition applied"
        exit 1
 #fi
     
    else
+   echo "condition not applied"
 # commiting changes to repository
     git config --global user.email ${GIT_USERNAME}
     git -C dep_repo add .
