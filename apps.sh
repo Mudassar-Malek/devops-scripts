@@ -42,7 +42,7 @@ echo $newminreplicas
 sudo sed -i -e "s/$oldminreplicas/$newminreplicas/g" dep_repo/manifest.yaml
 echo "changed the replicas"
 
-if [[ ${newmaxreplicas} == "0" && ${newminreplicas} == "0" ]] 
+if [[ ${maxreplicas} == "0" && ${minreplicas} == "0" ]] 
 then
     echo $namespace
     echo "condition applied"
