@@ -41,14 +41,13 @@ newminreplicas="minReplicas: $minreplicas"
    sudo sed -i -e "s/$oldminreplicas/$newminreplicas/g" dep_repo/manifest.yaml
    echo "changed the replicas"
 
-   if [[ ${newmaxreplicas} -eq 0 ]] && [[ ${newminreplicas} -eq 0 ]]; 
-   then
+if [[ ${newmaxreplicas} == "0" && ${newminreplicas} == "0" ]] 
+then
         echo $namespace
         echo "condition applied"
-       exit 1
 #fi
     
-   else
+else
    echo "condition not applied"
 # commiting changes to repository
     git config --global user.email ${GIT_USERNAME}
@@ -67,4 +66,4 @@ newminreplicas="minReplicas: $minreplicas"
    #else 
         argocd app sync $namespace
         argocd app wait $namespace --operation
-   fi
+fi
