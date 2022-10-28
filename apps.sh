@@ -44,7 +44,7 @@ newminreplicas="minReplicas: $minreplicas"
    if [[ ${newmaxreplicas} == 0 ]] && [[ ${newminreplicas} == 0 ]]; 
    then
         echo $namespace
-       
+       exit 1
 #fi
     
    else
