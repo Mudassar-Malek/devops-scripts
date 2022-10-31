@@ -44,7 +44,7 @@ echo "changed the replicas"
 
 if [[ ${maxreplicas} == "0" && ${minreplicas} == "0" ]] 
 then
-    argocd app get $namespace
+    argocd app delete-resource $namespace --kind Deployment --all 
 else
 # commiting changes to repository
     git config --global user.email ${GIT_USERNAME}
