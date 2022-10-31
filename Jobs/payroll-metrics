@@ -34,7 +34,7 @@ pipeline {
                                 name: 'Environment'
                             ),
                             string(
-                                name: 'maxReplicas', 
+                                name: 'maxReplicas',
                                 trim: true
                             ),
                             string(
