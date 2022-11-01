@@ -1,0 +1,75 @@
+// The library version is controlled from the Jenkins configuration
+
+def gitCredID = "github-svc-sbseg-ci"
+def argocd_server = new URL("https://payroll.argocd.tools-k8s-prd.a.intuit.com").getHost() + ":443"
+def argocd_password_name = "argocd-job-schedule"
+
+
+pipeline {
+    agent {
+        kubernetes {
+            label "payroll-backoffice-infra-scaling-pods-job"
+            yamlFile 'Jobs/KubernetesPods.yaml'
+        }
+    }
+
+
+    stages {
+      stage('Setup parameters') {
+            steps {
+                script {
+                    properties([
+                        parameters([
+                            choice(
+                                choices: ['job-schedule'],
+                                name: 'Service',
+                                description: 'Select the service to scale up or down'
+                            ),
+                            choice(
+                                choices: ['usw2', 'use2'],
+                                name: 'Region'
+                            ),
+                            choice(
+                                choices: ['qal'],
+                                name: 'Environment'
+                            ),
+                            string(
+                                name: 'maxReplicas',
+                                trim: true
+                            ),
+                            string(
+                                name: 'minReplicas', 
+                                trim: true
+                            )
+                        ])
+                    ])
+                }
+            }
+        }
+      
+      
+      stage("Approval") {
+        steps {
+            script {
+                input(id: 'Proceed', message: "Can Failover. Approve to proceed")
+            }
+        }
+    }
+      stage('Scale') {
+          steps {
+            withCredentials([usernamePassword(credentialsId: "${gitCredID}", passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+                withCredentials([string(credentialsId: "${argocd_password_name}", variable: 'ARGOCD_AUTH_TOKEN')]) {
+                  container('fso') {
+                      withEnv(["ARGOCD_SERVER=${argocd_server}", 'ARGOCD_OPTS= --insecure']) {
+                        script {
+                            sh(label: 'Scaling in', script: "stdbuf -oL -eL sh apps.sh ${params.Service} ${params.Environment} ${params.Region} ${params.maxReplicas} ${params.minReplicas}")
+                        }
+                    }
+              }
+            }
+            }
+              
+          }
+      }
+    }
+}
