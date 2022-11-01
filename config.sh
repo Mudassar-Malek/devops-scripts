@@ -28,12 +28,12 @@ case $ws in
     k8snamespace=payroll-payrollmetrics-usw2-qal
     ;;
 
-"payroll-metrics-prod-usw2") echo "your env is payroll-metrics-prod-usw2"
+"job-schedule-qal-usw2") echo "your env is job-schedule-qal-usw2"
 
-    github_url=https://github.intuit.com/payroll-payrolltax/payroll-metrics-deployment.git
+    github_url=https://github.intuit.com/services-jobs/job-schedule-deployment.git
     argocdurl=payroll.argocd.tools-k8s-prd.a.intuit.com
-    gbranch=prod
-    k8snamespace=pts-prod-usw2
+    gbranch=environments/qal-usw2-eks
+    k8snamespace=services-jobschedule-usw2-qal
     ;;
 
 *) echo "Invalid value, please enter valid value "
