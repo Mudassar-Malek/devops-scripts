@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# echo "Choose your service (JSS PTS ADE): "
+# echo "Choose your service (JSS PTS ADE TFA): "
 svc=$1
 
 # echo "Choose your Environment :- (QA PROD PRF) "
@@ -26,17 +26,27 @@ case $ws in
     argocdurl=payroll.argocd.tools-k8s-prd.a.intuit.com
     gbranch=environments/qal-usw2-eks 
     k8snamespace=payroll-payrollmetrics-usw2-qal
+    appname=payroll-metrics-hpa
     ;;
 
-"payroll-metrics-prod-usw2") echo "your env is payroll-metrics-prod-usw2"
+"job-schedule-qal-usw2") echo "your env is job-schedule-qal-usw2"
 
-    github_url=https://github.intuit.com/payroll-payrolltax/payroll-metrics-deployment.git
+    github_url=github.intuit.com/services-jobs/job-schedule-deployment.git
     argocdurl=payroll.argocd.tools-k8s-prd.a.intuit.com
-    gbranch=prod
-    k8snamespace=pts-prod-usw2
+    gbranch=environments/qal-usw2-eks
+    k8snamespace=services-jobschedule-usw2-qal
+    appname=hpa
+    ;;
+
+"payroll-fillings-prf-usw2") echo "your env is payroll-fillings-prf-usw2"
+
+    github_url=github.intuit.com/payroll-payrolltax/payroll-filings-deployment.git
+    argocdurl=payroll.argocd.tools-k8s-prd.a.intuit.com
+    gbranch=environments/prf-usw2-eks
+    k8snamespace=payroll-payrollfilings-usw2-prf
+    appname=hpa
+    desiredapps=payroll-fillings-prf-usw2
     ;;
 
 *) echo "Invalid value, please enter valid value "
 esac
-
-

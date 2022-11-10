@@ -15,37 +15,31 @@ argourl=$argocdurl
 # Application namespace on argocd 
 namespace=$k8snamespace
 
-echo $gurl
-echo $gbranch
-echo $namespace
-
-# cloning repo with specific branch on pts-dev directory 
+# cloning repo with specific branch on dep_repo directory 
 git clone -b $gbranch --single-branch "https://${GIT_USERNAME}:${GIT_PASSWORD}@${gurl}" dep_repo
 
-# cloning repo with specific branch on pts-dev directory 
-    #git clone -b $branch --single-branch $gurl 
-
-#replicas=$maxreplicas
-oldmaxreplicas="maxReplicas: $(cat dep_repo/manifest.yaml | grep maxReplicas | awk '{print $2}')"
-newmaxreplicas="maxReplicas: $maxreplicas"
-#echo $oldmaxreplicas
-#echo $newmaxreplicas
-
-# To change maxreplicas as per user input for scale up and down application  
-   sudo sed -i -e "s/$oldmaxreplicas/$newmaxreplicas/g" dep_repo/manifest.yaml
-
-#replicas=$minreplicas
-oldminreplicas="minReplicas: $(cat dep_repo/manifest.yaml | grep minReplicas | awk '{print $2}')"
-newminreplicas="minReplicas: $minreplicas"
-#echo $newminreplicas
-# To change minreplicas as per user input for scale up and down application  
-sudo sed -i -e "s/$oldminreplicas/$newminreplicas/g" dep_repo/manifest.yaml
-echo "changed the replicas"
+export apps=$appname
+export max=$maxreplicas
+export min=$minreplicas
 
 if [[ ${maxreplicas} == "0" && ${minreplicas} == "0" ]] 
 then
+   
     argocd app delete-resource $namespace --kind Rollout --all 
 else
+    if [[ $ws == $desiredapps ]]
+    then
+    # To change maxreplicas as per user input for scale up and down application
+    yq -i 'select(.metadata.name == env(apps)).spec.maxReplicas |= env(max)' dep_repo/manifest.yaml
+    yq -i 'select(.metadata.name == env(apps)).spec.minReplicas |= env(min)' dep_repo/manifest.yaml
+    
+    else
+    # To change maxreplicas as per user input for scale up and down application  
+    yq -i 'select(.metadata.name == env(apps)).spec.maxReplicas |= env(max)' dep_repo/manifest.yaml
+    yq -i 'select(.metadata.name == env(apps)).spec.minReplicas |= env(min)' dep_repo/manifest.yaml
+
+    echo "changed the replicas"
+    fi
 # commiting changes to repository
     git config --global user.email ${GIT_USERNAME}
     git -C dep_repo add .
